@@ -4,7 +4,7 @@ docs:
 	swag init
 
 build: docs
-	go build .
+	go build -o bin/ .
 
 run: docs
 	go run .
