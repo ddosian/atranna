@@ -1,0 +1,28 @@
+basePath: /api/v1
+definitions:
+  routers.healthResponse:
+    properties:
+      status:
+        example: ok
+        type: string
+    type: object
+info:
+  contact: {}
+  description: API backend for Atranna
+  title: Atranna API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      description: Reports whether the API is up
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/routers.healthResponse'
+      summary: Health check
+      tags:
+      - health
+swagger: "2.0"
