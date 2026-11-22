@@ -16,9 +16,9 @@ import (
 func main() {
 	router := gin.Default()
 
-	v1_router := router.Group("/api/v1")
+	v1Router := router.Group("/api/v1")
 
-	v1_router.GET("/health", routers.GetHealth)
+	v1Router.GET("/health", routers.GetHealth)
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
