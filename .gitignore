@@ -3,3 +3,6 @@
 
 # Development environment
 .vscode/
+
+# Build artifacts
+bin/

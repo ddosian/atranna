@@ -1,9 +1,9 @@
 # Atranna API
 API backend for [Atranna](https://github.com/ddosian/atranna)
 ## Development
-Start the API with Docker:
+Start the API & regenerate docs:
 ```bash
-docker compose up --build
+make run
 ```
 Check if its running
 ```bash
