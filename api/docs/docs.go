@@ -17,7 +17,7 @@ const docTemplate = `{
     "paths": {
         "/health": {
             "get": {
-                "description": "Reports whether the API is up",
+                "description": "Reports whether the API is up and the database version",
                 "produces": [
                     "application/json"
                 ],
@@ -31,6 +31,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/routers.healthResponse"
                         }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/routers.healthUnavailableResponse"
+                        }
                     }
                 }
             }
@@ -40,9 +46,22 @@ const docTemplate = `{
         "routers.healthResponse": {
             "type": "object",
             "properties": {
+                "db_version": {
+                    "type": "string",
+                    "example": "3.46.0"
+                },
                 "status": {
                     "type": "string",
                     "example": "ok"
+                }
+            }
+        },
+        "routers.healthUnavailableResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "example": "database unavailable"
                 }
             }
         }

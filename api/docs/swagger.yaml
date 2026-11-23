@@ -2,8 +2,17 @@ basePath: /api/v1
 definitions:
   routers.healthResponse:
     properties:
+      db_version:
+        example: 3.46.0
+        type: string
       status:
         example: ok
+        type: string
+    type: object
+  routers.healthUnavailableResponse:
+    properties:
+      status:
+        example: database unavailable
         type: string
     type: object
 info:
@@ -14,7 +23,7 @@ info:
 paths:
   /health:
     get:
-      description: Reports whether the API is up
+      description: Reports whether the API is up and the database version
       produces:
       - application/json
       responses:
@@ -22,6 +31,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/routers.healthResponse'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/routers.healthUnavailableResponse'
       summary: Health check
       tags:
       - health
