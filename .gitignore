@@ -6,3 +6,6 @@
 
 # Build artifacts
 bin/
+
+# Development
+data/

@@ -7,13 +7,21 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/ddosian/atranna/api/internal/db"
 )
 
 func TestGetHealth(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
+	conn, err := db.Open(":memory:")
+	if err != nil {
+		t.Fatalf("open db: %v", err)
+	}
+	defer conn.Close()
+
 	router := gin.New()
-	router.GET("/health", GetHealth)
+	router.GET("/health", GetHealth(conn))
 
 	req := httptest.NewRequest(http.MethodGet, "/health", nil)
 	w := httptest.NewRecorder()
@@ -31,5 +39,9 @@ func TestGetHealth(t *testing.T) {
 
 	if response.Status != "ok" {
 		t.Errorf("status field = %q, want %q", response.Status, "ok")
+	}
+
+	if response.DBVersion == "" {
+		t.Error("db_version is empty")
 	}
 }
