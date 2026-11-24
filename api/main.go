@@ -10,6 +10,7 @@ import (
 
 	_ "github.com/ddosian/atranna/api/docs"
 	"github.com/ddosian/atranna/api/internal/db"
+	"github.com/ddosian/atranna/api/internal/helpers"
 	"github.com/ddosian/atranna/api/internal/server/routers"
 )
 
@@ -27,6 +28,10 @@ func main() {
 		log.Fatalf("open database: %v", err)
 	}
 	defer conn.Close()
+
+	if err := helpers.RunMigrations(conn); err != nil {
+		log.Fatalf("migrate database: %v", err)
+	}
 
 	router := gin.Default()
 
