@@ -9,7 +9,7 @@ import (
 
 func Open(path string) (*sql.DB, error) {
 	dsn := fmt.Sprintf(
-		"file:%s",
+		"file:%s?_pragma=foreign_keys(1)",
 		path,
 	)
 
